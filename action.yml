@@ -19,6 +19,10 @@ inputs:
   message_id:
     description: 'The ID of the existing Slack message to update.'
     required: false
+  thread_ts:
+    description: 'The ID of a message to send to a thread.'
+    required: false
+
 outputs:
   message_id:
     description: 'The unique timestamp identifier of the Slack message sent.'
