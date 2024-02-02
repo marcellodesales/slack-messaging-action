@@ -6,6 +6,7 @@ const { WebClient } = require( '@slack/web-api' );
 		const botToken = core.getInput( 'bot_token' );
 		const channel = core.getInput( 'channel' );
 		const messageId = core.getInput( 'message_id' );
+		const threadTs = core.getInput( 'thread_ts' );
 		const payload = core.getInput( 'payload' );
 		const slack = new WebClient( botToken );
 
@@ -31,10 +32,15 @@ const { WebClient } = require( '@slack/web-api' );
 			args.ts = messageId;
 		}
 
+		if ( threadTs ) {
+			args.thread_ts = threadTs;
+		}
+
 		// Send the message.
 		const response = await slack.chat[ apiMethod ]( args );
 
 		core.setOutput( 'message_id', response.ts );
+
 	} catch ( error ) {
 		core.setFailed( error );
 	}
